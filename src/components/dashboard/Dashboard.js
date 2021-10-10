@@ -23,7 +23,7 @@ function Dashboard () {
         try {
             const response = await postData('GET', data, 'v1/emailer/'+${clientId}'/summary');
             if (response !== undefined) {
-                storeUser(response.summary, response.clientId);
+                storeSummary(response.summary, response.clientId);
                 history.push('/summary');
             }
         } catch (err) {
