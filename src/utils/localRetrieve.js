@@ -1,9 +1,5 @@
 export const getToken = () => {
-    return localStorage.getItem('login_Token');
-}
-
-export const getPhone = () => {
-    return localStorage.getItem('phone_Number');
+    return localStorage.getItem('token');
 }
 
 export const getEmail = () => {
@@ -11,17 +7,7 @@ export const getEmail = () => {
 }
 
 export const getId = () => {
-    return localStorage.getItem('user_ID');
+    return localStorage.getItem('clientId');
 }
 
-export const getUserToken = () => {
-    return localStorage.getItem('user_Token');
-}
 
-export const getFirstName = () => {
-    return localStorage.getItem('firstName');
-}
-
-export const getLastName = () => {
-    return localStorage.getItem('lastName');
-}

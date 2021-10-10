@@ -26,7 +26,7 @@ export const postData = async (method, data, url) => {
         body: JSON.stringify(data)
     };
     const response = await fetch(
-        `/${url}`,
+        'http://localhost:11235/v1/emailer/auth',
         requestOptions
     );
 
@@ -41,7 +41,7 @@ export const urlData = async (url) => {
         method: 'PUT'
     };
     const response = await fetch(
-        `/${url}`,
+        `${BASEURL/url}`,
         requestOptions
     );
 
@@ -49,23 +49,6 @@ export const urlData = async (url) => {
     return postResponse;
 }
 
-//Authentication function
-export const authUpdate = async (method, data, id, token) => {
-    const requestOptions = {
-        method,
-        headers: {
-            'Authorization': `Bearer ${id},${token}`,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    };
-    const response = await fetch(
-        `/users/${id}`,
-        requestOptions
-    );
-    const updateResponse = await response.json();
-    return updateResponse;
-}
 
 //Logout profile function
 export const logoutProfile = async (id, token) => {
@@ -77,7 +60,7 @@ export const logoutProfile = async (id, token) => {
         }
     }
     const response = await fetch(
-        `/users/logout/${id}`,
+        `${BASEURL}/users/logout/${id}`,
         requestOptions
     );
     const logoutResponse = await response.json();
@@ -85,4 +68,4 @@ export const logoutProfile = async (id, token) => {
 }
 
 
-export const BASEURL = '/user';
+export const BASEURL = 'http://localhost:11235/';

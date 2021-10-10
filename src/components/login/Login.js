@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form'
 import { useHistory } from 'react-router-dom';
 import { validateEmail, postData } from '../../utils/utils';
-import { storeEmailAndToken } from '../../utils/localStore';
 import { LoginPage, Form, Title } from './LoginElements';
+import {storeUser} from "../../utils/localStore";
 
 
 
@@ -13,13 +13,11 @@ const Login = ({ toast }) => {
     //Post phone number and proceeds to next page to verify otp
     const submitHandler = async (data) => {
         try {
-            const response = await postData('POST', data, 'users/email');
-            if (response.success) {
-                const { token } = response.results;
-                const { email } = data;
-                storeEmailAndToken(email, token)
-                history.push('/dashboard')
-                toast.success(response.message);
+            const response = await postData('POST', data, 'v1/emailer/auth');
+            if (response !== undefined) {
+                storeUser(response.token, response.clientId);
+                history.push('/dashboard');
+                toast.success('Logged In')
             }
         } catch (err) {
             toast.error('INTERNAL SERVER ERROR. TRY AGAIN LATER')
@@ -37,11 +35,11 @@ const Login = ({ toast }) => {
             <Form onSubmit={handleSubmit(submitHandler)}>
                 <label>Email Id</label><br />
                 <input type='text'
-                       name='Email'
+                       name='username'
                        autoFocus={true}
                        onKeyDown={(e) => validateEmail(e)}
                        ref={register({
-                           required: 'EmailId is required',
+                           required: 'UserName is required',
                            minLength: {
                                value: 10,
                                message: 'Please enter a valid Email Id'
