@@ -4,6 +4,8 @@ import Menu from "@material-ui/core/Menu";
 import React from "react";
 import {logoutProfile} from "../../utils/utils";
 import {getId} from "../../utils/localRetrieve";
+import {storeUser} from "../../utils/localStore";
+import {postData } from '../../utils/utils';
 
 function Dashboard () {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -16,8 +18,17 @@ function Dashboard () {
         setAnchorEl(event.currentTarget);
     };
 
-    const handleSummary = () => {
-        // TODO : call summary api
+    const handleSummary = async () => {
+        const clientId = getId();
+        try {
+            const response = await postData('GET', data, 'v1/emailer/'+${clientId}'/summary');
+            if (response !== undefined) {
+                storeUser(response.summary, response.clientId);
+                history.push('/summary');
+            }
+        } catch (err) {
+            console.log("Error: {}")
+        }
     };
 
     const handleDetail = (event) => {
