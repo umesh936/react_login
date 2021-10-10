@@ -51,16 +51,12 @@ export const urlData = async (url) => {
 
 
 //Logout profile function
-export const logoutProfile = async (id, token) => {
+export const logoutProfile = async (id) => {
     const requestOptions = {
-        method: "DELETE",
-        headers: {
-            'Authorization': `Bearer ${id},${token}`,
-            'Content-Type': 'application/json'
-        }
+        method: "DELETE"
     }
     const response = await fetch(
-        `${BASEURL}/users/logout/${id}`,
+        `${BASEURL}/v1/emailer/${id}/auth`,
         requestOptions
     );
     const logoutResponse = await response.json();
