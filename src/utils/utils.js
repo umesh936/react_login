@@ -1,23 +1,4 @@
-import {getToken} from "./localRetrieve";
-
-export const validateNumber = (event) => {
-    const keyCode = event.keyCode;
-
-    const excludedKeys = [8, 37, 39, 46];
-
-    if (!((keyCode >= 48 && keyCode <= 57) ||
-        (keyCode >= 96 && keyCode <= 105) ||
-        (excludedKeys.includes(keyCode)))) {
-        event.preventDefault();
-    }
-
-}
-
-export const validateEmail = (event) => {
-    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(event);
-
-}
+import {getId, getToken} from "./localRetrieve";
 
 //Reusable post function which can be used for PUT method too
 
@@ -28,7 +9,7 @@ export const postData = async (method, data, url) => {
         body: JSON.stringify(data)
     };
     const response = await fetch(
-        'http://localhost:11235/v1/emailer/auth/demo',
+        'http://125.17.108.33:11235:11235/v1/emailer/auth/demo',
         requestOptions
     );
 
@@ -43,7 +24,7 @@ export const GetData = async () => {
         headers: { "x-em-token": getToken() }
     };
     const response = await fetch(
-        'http://localhost:11235/v1/emailer/1/summary/demo',
+        'http://125.17.108.33:11235/v1/emailer/1/summary/demo',
         requestOptions
     );
 
@@ -51,6 +32,37 @@ export const GetData = async () => {
     return postResponse;
 
 }
+
+export const GetFeatureData = async () => {
+    const clientId = getId()
+    const requestOptions = {
+        method: "GET",
+        headers: { "x-em-token": getToken() }
+    };
+    const response = await fetch(
+        `http://125.17.108.33:11235/v1/emailer/${clientId}/campaign/summary`,
+        requestOptions
+    );
+
+    const getResponse = await response.json();
+    return getResponse;
+}
+
+export const GetMonthlyData = async () => {
+    const clientId = getId()
+    const requestOptions = {
+        method: "GET",
+        headers: { "x-em-token": getToken() }
+    };
+    const response = await fetch(
+        `http://125.17.108.33:11235/v1/emailer/${clientId}/campaign/active`,
+        requestOptions
+    );
+
+    const getResponse = await response.json();
+    return getResponse;
+}
+
 
 //used for PUT method without any body object
 export const urlData = async (url) => {
@@ -82,4 +94,4 @@ export const logoutProfile = async (id) => {
 }
 
 
-export const BASEURL = 'http://localhost:11235/';
+export const BASEURL = 'http://125.17.108.33:11235/';
