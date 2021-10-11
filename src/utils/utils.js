@@ -9,7 +9,7 @@ export const postData = async (method, data, url) => {
         body: JSON.stringify(data)
     };
     const response = await fetch(
-        'http://125.17.108.33:11235:11235/v1/emailer/auth/demo',
+        'http://125.17.108.33:11235/v1/emailer/auth',
         requestOptions
     );
 
