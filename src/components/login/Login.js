@@ -1,3 +1,5 @@
+import "./login.css";
+import 'bootstrap3/dist/css/bootstrap.min.css';
 import { useForm } from 'react-hook-form'
 import { useHistory } from 'react-router-dom';
 import { validateEmail, postData } from '../../utils/utils';
@@ -51,38 +53,27 @@ const Login = ({ toast }) => {
                 <h1>Welcome to App!</h1>
             </Title>
             <div >
-                <label>Email Id</label><br />
-                <input type='text'
-                       name='username'
-                       autoFocus={true}
-                       {...username}
-                /><br />
-                {errors.email && <p>{errors.email.message}</p>}<br />
-                <label>Password</label><br />
-                <input type='password'
-                       name='password'
-                       autoFocus={true}
-                       {...password}
-                /><br />
-                {errors.password && <p>{errors.password.message}</p>}<br />
-                <button onClick={submitHandler} >Login</button>
-            </div>
+                <div >
+                    <label>Email Id</label><br />
+                    <input type='text'
+                           name='username'
+                           className="form-control"
+                           autoFocus={true}
+                           {...username}
+                    /><br />
+                    {errors.email && <p>{errors.email.message}</p>}<br />
+                    <label>Password</label><br />
+                    <input type='password'
+                           name='password'
+                           className="form-control"
+                           autoFocus={true}
+                           {...password}
+                    /><br />
+                    {errors.password && <p>{errors.password.message}</p>}<br />
+                    <button className="btn btn-lg btn-primary btn-block btn-signin" onClick={submitHandler} >Login</button>
+                </div>
+                </div>
 
-            {/*<Form onSubmit={handleSubmit(submitHandler)}>*/}
-            {/*    <label>Email Id</label><br />*/}
-            {/*    <input type='text'*/}
-            {/*           name='username'*/}
-            {/*           autoFocus={true}*/}
-            {/*    /><br />*/}
-            {/*    {errors.email && <p>{errors.email.message}</p>}<br />*/}
-            {/*    <label>Password</label><br />*/}
-            {/*    /!*<input type='password'*!/*/}
-            {/*    /!*       name='password'*!/*/}
-            {/*    /!*       autoFocus={true}*!/*/}
-            {/*    /!*      /><br />*!/*/}
-            {/*    /!*{errors.password && <p>{errors.password.message}</p>}<br />*!/*/}
-            {/*    <button onClick={}>Login</button>*/}
-            {/*</Form>*/}
         </LoginPage>
 
     )

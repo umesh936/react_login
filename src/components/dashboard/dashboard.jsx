@@ -10,7 +10,7 @@ function Dashboard() {
     return (
         <Router>
             <Topbar/>
-            <div className="container">
+            <div className="">
                 <Sidebar/>
 
                 <Switch>
