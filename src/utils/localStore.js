@@ -5,9 +5,8 @@ export const storeUser = (token, clientId) => {
 }
 
 
-export const storeSummary = (summary, clientId) => {
+export const storeSummary = (summary) => {
     localStorage.setItem('summary', summary);
-    localStorage.setItem('clientId', clientId);
 }
 
 export const getStoreSummary = () => {

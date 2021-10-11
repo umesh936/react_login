@@ -2,10 +2,17 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import React from "react";
-import {logoutProfile} from "../../utils/utils";
+import {GetData, logoutProfile} from "../../utils/utils";
 import {getId} from "../../utils/localRetrieve";
-import {storeUser} from "../../utils/localStore";
+import {storeSummary, storeUser} from "../../utils/localStore";
 import {postData } from '../../utils/utils';
+import Topbar from "../topbar/Topbar";
+import Sidebar from "../sidebar/Sidebar";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import Login from "../login/Login";
+import AuthRoute from "../../routes/AuthRoute";
+import Summary from "../Summary/Summary";
+import {ToastContainer} from "react-toastify";
 
 function Dashboard () {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -19,12 +26,11 @@ function Dashboard () {
     };
 
     const handleSummary = async () => {
-        const clientId = getId();
         try {
-            const response = await postData('GET', data, 'v1/emailer/'+${clientId}'/summary');
+            const response = await GetData();
             if (response !== undefined) {
-                storeSummary(response.summary, response.clientId);
-                history.push('/summary');
+                storeSummary(response.summary);
+                //history.push('/summary');
             }
         } catch (err) {
             console.log("Error: {}")
@@ -42,30 +48,39 @@ function Dashboard () {
     };
 
     return (
-        <div
-            style={{
-                marginLeft: "40%",
-            }}
-        >
-            <h2>Welcome Emailer Dashbaord</h2>
-            <Button
-                aria-controls="simple-menu"
-                aria-haspopup="true"
-                onClick={handleClick}
-            >
-                Menu
-            </Button>
-            <Menu
-                keepMounted
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                open={Boolean(anchorEl)}
-            >
-                <MenuItem onClick={handleSummary}>Summary</MenuItem>
-                <MenuItem onClick={handleDetail}>Details</MenuItem>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
-            </Menu>
-        </div>
+        <Router>
+            <Topbar />
+            <div className="container">
+                <Sidebar />
+                <Switch>
+                    <Route exact path="/home">
+                        <Login/>
+                    </Route>
+                    <AuthRoute exact path="/summary">
+                        <Summary/>
+                    </AuthRoute>
+                    <AuthRoute exact path="/logout">
+                        <Summary/>
+                    </AuthRoute>
+                    <Route path="*">
+                        <div>404 Not found </div>
+                    </Route>
+
+                </Switch>
+            </div>
+
+            <ToastContainer
+                position="bottom-center"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
+        </Router>
     );
 }
 

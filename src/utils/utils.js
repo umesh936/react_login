@@ -1,3 +1,5 @@
+import {getToken} from "./localRetrieve";
+
 export const validateNumber = (event) => {
     const keyCode = event.keyCode;
 
@@ -26,7 +28,22 @@ export const postData = async (method, data, url) => {
         body: JSON.stringify(data)
     };
     const response = await fetch(
-        'http://localhost:11235/v1/emailer/auth',
+        'http://localhost:11235/v1/emailer/auth/demo',
+        requestOptions
+    );
+
+    const postResponse = await response.json();
+    return postResponse;
+
+}
+
+export const GetData = async () => {
+    const requestOptions = {
+        method: "GET",
+        headers: { "x-em-token": getToken() }
+    };
+    const response = await fetch(
+        'http://localhost:11235/v1/emailer/1/summary/demo',
         requestOptions
     );
 
@@ -53,6 +70,7 @@ export const urlData = async (url) => {
 //Logout profile function
 export const logoutProfile = async (id) => {
     const requestOptions = {
+        headers: { "x-em-token": getToken() },
         method: "DELETE"
     }
     const response = await fetch(

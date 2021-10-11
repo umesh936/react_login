@@ -1,9 +1,12 @@
 import {getStoreSummary} from "../../utils/localStore";
 
 function Summary() {
-    const data  = getStoreSummary()
+    let data = getStoreSummary()
     return (
-        <h2>Summary</h2>
+        data.forEach(
+            <h2>{data.id}</h2>
+        )
+
     )
 }
 

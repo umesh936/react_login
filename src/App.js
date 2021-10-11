@@ -18,7 +18,7 @@ function App() {
             <Login toast={toast} />
           </Route>
           <AuthRoute exact path="/dashboard">
-            <Dashboard toast={toast} />
+            <Dashboard />
           </AuthRoute>
           <Route path="*">
             <div>404 Not found </div>
