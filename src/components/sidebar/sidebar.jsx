@@ -2,14 +2,8 @@ import "./sidebar.css";
 import {
   LineStyle,
   Timeline,
-  TrendingUp,
   PermIdentity,
   Storefront,
-  AttachMoney,
-  BarChart,
-  MailOutline,
-  DynamicFeed,
-  ChatBubbleOutline,
   WorkOutline,
   Report,
 } from "@material-ui/icons";
@@ -31,6 +25,10 @@ export default function Sidebar() {
             <li className="sidebarListItem">
               <Timeline className="sidebarIcon" />
               Analytics
+            </li>
+            <li className="sidebarListItem">
+              <Report className="sidebarIcon" />
+              Reports
             </li>
           </ul>
         </div>

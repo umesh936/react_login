@@ -15,12 +15,12 @@ const Login = ({ toast }) => {
         try {
             const response = await postData('POST', data, 'v1/emailer/auth');
             if (response !== undefined) {
+
                 storeUser(response.token, response.clientId);
                 history.push('/dashboard');
                 toast.success('Logged In')
             }
         } catch (err) {
-            toast.error('INTERNAL SERVER ERROR. TRY AGAIN LATER')
             history.push('/dashboard')
             toast.success(err.message);
         }

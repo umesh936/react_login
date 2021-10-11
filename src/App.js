@@ -4,7 +4,7 @@ import AuthRoute from './routes/AuthRoute';
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Login from "./components/login/Login";
-import Dashboard from "./components/dashboard/Dashboard";
+import Dashboard from "./components/dashboard/dashboard";
 
 
 function App() {

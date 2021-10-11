@@ -1,0 +1,10 @@
+.home{
+    flex: 4;
+    float: right ;
+    width: 70%;
+}
+
+.homeWidgets{
+    display: flex;
+    margin: 20px;
+}
