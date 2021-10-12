@@ -33,15 +33,17 @@ export default function SummaryList() {
                     <th>Email</th>
                     <th>Status</th>
                 </tr>
-                {data.map((item) => (
+                {data.then(result =>{
+                    result.map((item) => (
 
-                    <TableItem
-                        id={item.id}
-                        username={item.username}
-                        email={item.email}
-                        status={item.status}
-                    />
-                ))}
+                        <TableItem
+                            id={item.id}
+                            username={item.username}
+                            email={item.email}
+                            status={item.status}
+                        />
+                    ))}
+                )}
             </table>
 
         </div>
