@@ -1,40 +1,37 @@
 import "./summaryList.css";
-import {DataGrid} from "@material-ui/data-grid";
-import {DeleteOutline} from "@material-ui/icons";
-import {userRows} from "../../dummyData";
-import {Link} from "react-router-dom";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import TableItem from "./TableItem";
 import {GetMonthlyData} from "../../utils/utils";
 
 export default function SummaryList() {
-    const [data, setData] = useState(GetMonthlyData());
+    const [data, setList] = useState([]);
 
-    const handleDelete = (id) => {
-        setData(data.filter((item) => item.id !== id));
-    };
-    console.log("-------")
-    console.log(data)
-    console.log("-------")
+    useEffect(() => {
+        let mounted = true;
+        GetMonthlyData()
+            .then(items => {
+                if(mounted) {
+                    setList(items)
+                }
+            })
+        return () => mounted = false;
+    }, [])
 
-    if(data === undefined) {
-        return (
-            <div>
-                <h4>No Data Available</h4>
-            </div>
-        )
-    }
+
+
+    // console.log("-------")
+    // console.log(data?.then(res=> console.log(res)))
+    // console.log("-------")
     return (
         <div className="userList">
-            <table id="customers">
+            <table className="table table-bordered">
                 <tr>
                     <th>Id</th>
                     <th>User Name</th>
                     <th>Email</th>
                     <th>Status</th>
                 </tr>
-                {data.then(result =>{
-                    result.map((item) => (
+                {data.map((item) => (
 
                         <TableItem
                             id={item.id}
@@ -43,7 +40,6 @@ export default function SummaryList() {
                             status={item.status}
                         />
                     ))}
-                )}
             </table>
 
         </div>
