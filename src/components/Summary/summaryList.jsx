@@ -25,21 +25,27 @@ export default function SummaryList() {
     return (
         <div className="userList">
             <table className="table table-bordered">
+                <thead>
                 <tr>
                     <th>Id</th>
                     <th>User Name</th>
                     <th>Email</th>
                     <th>Status</th>
                 </tr>
+                </thead>
+                <tbody>
                 {data.map((item) => (
 
-                        <TableItem
-                            id={item.id}
-                            username={item.username}
-                            email={item.email}
-                            status={item.status}
-                        />
-                    ))}
+                    <TableItem
+                        id={item.id}
+                        username={item.username}
+                        email={item.email}
+                        status={item.status}
+                    />
+                ))}
+                </tbody>
+
+
             </table>
 
         </div>
