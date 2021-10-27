@@ -35,16 +35,16 @@ export default function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Mailer </h3>
           <ul className="sidebarList">
-            <Link to="/summary" className="link">
-              <li className="sidebarListItem">
-                <PermIdentity className="sidebarIcon" />
-                Monthly Summary
-              </li>
-            </Link>
-            <Link to="/campaign" className="link">
+            <Link to="/active" className="link">
               <li className="sidebarListItem">
                 <Storefront className="sidebarIcon" />
                 Active Campaign
+              </li>
+            </Link>
+            <Link to="/summary" className="link">
+              <li className="sidebarListItem">
+                <PermIdentity className="sidebarIcon" />
+                Summary
               </li>
             </Link>
           </ul>
@@ -56,6 +56,12 @@ export default function Sidebar() {
               <WorkOutline className="sidebarIcon" />
               User Manage
             </li>
+            <Link to="/settings" className="link">
+              <li className="sidebarListItem">
+                <PermIdentity className="sidebarIcon" />
+                Setting
+              </li>
+            </Link>
             <Link to="/logout" className="link">
               <li className="sidebarListItem">
                 <PermIdentity className="sidebarIcon" />

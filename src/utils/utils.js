@@ -9,22 +9,7 @@ export const postData = async (method, data, url) => {
         body: JSON.stringify(data)
     };
     const response = await fetch(
-        'http://125.17.108.33:11235/v1/emailer/auth',
-        requestOptions
-    );
-
-    const postResponse = await response.json();
-    return postResponse;
-
-}
-
-export const GetData = async () => {
-    const requestOptions = {
-        method: "GET",
-        headers: { "x-em-token": getToken() }
-    };
-    const response = await fetch(
-        'http://125.17.108.33:11235/v1/emailer/1/summary/demo',
+        'http://125.17.108.33:11235/api/v1/emailer/auth',
         requestOptions
     );
 
@@ -37,10 +22,11 @@ export const GetFeatureData = async () => {
     const clientId = getId()
     const requestOptions = {
         method: "GET",
-        headers: { "x-em-token": getToken() }
+        headers: { "x-em-token": getToken(),
+        "content-type": "application/json"}
     };
     const response = await fetch(
-        `http://125.17.108.33:11235/v1/emailer/${clientId}/campaign/summary`,
+        `http://125.17.108.33:11235/api/v1/emailer/${clientId}/campaign/summary`,
         requestOptions
     );
 
@@ -48,14 +34,15 @@ export const GetFeatureData = async () => {
     return getResponse;
 }
 
-export const GetMonthlyData = async () => {
+export const GetActiveData = async () => {
     const clientId = getId()
     const requestOptions = {
         method: "GET",
-        headers: { "x-em-token": getToken() }
+        headers: { "x-em-token": getToken() ,
+            "content-type": "application/json"}
     };
     const response = await fetch(
-        `http://125.17.108.33:11235/v1/emailer/${clientId}/campaign/active`,
+        `http://125.17.108.33:11235/api/v1/emailer/${clientId}/campaign/month/active`,
         requestOptions
     );
 
@@ -63,6 +50,37 @@ export const GetMonthlyData = async () => {
     return getResponse;
 }
 
+export const GetSummaryData = async () => {
+    const clientId = getId()
+    const requestOptions = {
+        method: "GET",
+        headers: { "x-em-token": getToken() ,
+            "content-type": "application/json"}
+    };
+    const response = await fetch(
+        `http://125.17.108.33:11235/api/v1/emailer/${clientId}/campaign/details`,
+        requestOptions
+    );
+
+    const getResponse = await response.json();
+    return getResponse;
+}
+
+export const GetSettingData = async () => {
+    const clientId = getId()
+    const requestOptions = {
+        method: "GET",
+        headers: { "x-em-token": getToken() ,
+            "content-type": "application/json"}
+    };
+    const response = await fetch(
+        `http://125.17.108.33:11235/api/v1/emailer/${clientId}/settings`,
+        requestOptions
+    );
+
+    const getResponse = await response.json();
+    return getResponse;
+}
 
 //used for PUT method without any body object
 export const urlData = async (url) => {
@@ -80,13 +98,14 @@ export const urlData = async (url) => {
 
 
 //Logout profile function
-export const logoutProfile = async (id) => {
+export const logoutProfile = async () => {
+    const clientId = getId()
     const requestOptions = {
         headers: { "x-em-token": getToken() },
         method: "DELETE"
     }
     const response = await fetch(
-        `${BASEURL}/v1/emailer/${id}/auth`,
+        `http://125.17.108.33:11235/api/v1/emailer/${clientId}/auth`,
         requestOptions
     );
     const logoutResponse = await response.json();
@@ -94,4 +113,4 @@ export const logoutProfile = async (id) => {
 }
 
 
-export const BASEURL = 'http://125.17.108.33:11235/';
+export const BASEURL = 'http://125.17.108.33:11235/api/';

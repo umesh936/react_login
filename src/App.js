@@ -1,6 +1,5 @@
 import {GlobalStyle} from './GlobalStyles';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import AuthRoute from './routes/AuthRoute';
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Login from "./components/login/Login";
@@ -17,9 +16,9 @@ function App() {
           <Route exact path="/">
             <Login toast={toast} />
           </Route>
-          <AuthRoute exact path="/dashboard">
+          <Route exact path="/dashboard">
             <Dashboard />
-          </AuthRoute>
+          </Route>
           <Route path="*">
             <div>404 Not found </div>
           </Route>
