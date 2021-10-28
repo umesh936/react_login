@@ -8,6 +8,7 @@ import Home from "../home/Home";
 import Logout from "../logout/logout";
 import SummaryList from "../Summary/summaryList";
 import SettingList from "../settings/settingList";
+import SmtpReport from "../smtp/smtpReport";
 
 function Dashboard() {
     return (
@@ -16,9 +17,12 @@ function Dashboard() {
             <div className="">
                 <Sidebar/>
                 <Switch>
-                    <Route exact path="/home">
+                    <AuthRoute exact path="/home">
                         <Home/>
-                    </Route>
+                    </AuthRoute>
+                    <AuthRoute exact path="/smtp">
+                        <SmtpReport/>
+                    </AuthRoute>
                     <AuthRoute exact path="/active">
                         <ActiveList/>
                     </AuthRoute>
@@ -31,9 +35,9 @@ function Dashboard() {
                     <AuthRoute exact path="/logout">
                         <Logout/>
                     </AuthRoute>
-                    <Route path="*">
+                    <AuthRoute path="*">
                         <div>404 Not found</div>
-                    </Route>
+                    </AuthRoute>
 
                 </Switch>
             </div>

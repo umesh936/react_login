@@ -6,8 +6,8 @@ const TableItem = (props) => {
             <td>{props.campName}</td>
             <td>{props.fromEmail}</td>
             <td>{props.totalCounter}</td>
-            <td>{props.startedOn}</td>
-            <td>{props.finishedOn}</td>
+            <td>{new Date(props.startedOn).toLocaleString()}</td>
+            <td>{new Date(props.finishedOn).toLocaleString()}</td>
             <td>{props.status}</td>
         </tr>
     );

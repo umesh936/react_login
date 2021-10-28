@@ -12,10 +12,7 @@ export const postData = async (method, data, url) => {
         'http://125.17.108.33:11235/api/v1/emailer/auth',
         requestOptions
     );
-
-    const postResponse = await response.json();
-    return postResponse;
-
+    return response.json();
 }
 
 export const GetFeatureData = async () => {
@@ -29,9 +26,7 @@ export const GetFeatureData = async () => {
         `http://125.17.108.33:11235/api/v1/emailer/${clientId}/campaign/summary`,
         requestOptions
     );
-
-    const getResponse = await response.json();
-    return getResponse;
+    return response.json();
 }
 
 export const GetActiveData = async () => {
@@ -45,9 +40,7 @@ export const GetActiveData = async () => {
         `http://125.17.108.33:11235/api/v1/emailer/${clientId}/campaign/month/active`,
         requestOptions
     );
-
-    const getResponse = await response.json();
-    return getResponse;
+    return response.json();
 }
 
 export const GetSummaryData = async () => {
@@ -61,9 +54,7 @@ export const GetSummaryData = async () => {
         `http://125.17.108.33:11235/api/v1/emailer/${clientId}/campaign/details`,
         requestOptions
     );
-
-    const getResponse = await response.json();
-    return getResponse;
+    return response.json();
 }
 
 export const GetSettingData = async () => {
@@ -77,9 +68,7 @@ export const GetSettingData = async () => {
         `http://125.17.108.33:11235/api/v1/emailer/${clientId}/settings`,
         requestOptions
     );
-
-    const getResponse = await response.json();
-    return getResponse;
+    return response.json();
 }
 
 //used for PUT method without any body object
@@ -91,9 +80,7 @@ export const urlData = async (url) => {
         `${BASEURL/url}`,
         requestOptions
     );
-
-    const postResponse = await response.json();
-    return postResponse;
+    return response.json();
 }
 
 
@@ -108,9 +95,23 @@ export const logoutProfile = async () => {
         `http://125.17.108.33:11235/api/v1/emailer/${clientId}/auth`,
         requestOptions
     );
-    const logoutResponse = await response.json();
-    return logoutResponse;
+    return response.json();
 }
 
+export const submitGenerateDataRequest = async (campName) => {
+    const clientId = getId()
+    const requestOptions = {
+        method: "GET",
+        headers: { "x-em-token": getToken() ,
+            "content-type": "application/json"}
+    };
+    const response = await fetch(
+        `http://125.17.108.33:11235/api/v1/emailer/report/smtp/${clientId}/${campName}`,
+        requestOptions
+    );
+
+    const getResponse = await response.json();
+    return getResponse;
+}
 
 export const BASEURL = 'http://125.17.108.33:11235/api/';
