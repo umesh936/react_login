@@ -110,8 +110,8 @@ export const submitGenerateDataRequest = async (campName) => {
         requestOptions
     );
 
-    const getResponse = await response.json();
-    return getResponse;
+    return response.text();
+
 }
 
 export const BASEURL = 'http://125.17.108.33:11235/api/';

@@ -3,32 +3,37 @@ import {useState, useEffect} from "react";
 import {submitGenerateDataRequest} from "../../utils/utils";
 
 export default function SmtpReport() {
-    const [msg, setMsg] = useState();
-    const [mounted, setMounted] = useState(false);
+    const [name, setName] = useState();
+    const [isDisable, setIsDisable] = useState(false);
+    const [nameFromButtonClicked, setNameFromButtonClicked] = useState();
+    const [msg, setMsg] = useState('');
 
-    function makeCall() {
-        console.log("in make call")
-        if (mounted) {
-            console.log("in make call condition")
-            submitGenerateDataRequest()
+    useEffect(() => {
+        if (nameFromButtonClicked) {
+            submitGenerateDataRequest(nameFromButtonClicked)
                 .then(response => {
-                    if (mounted) {
-                        setMsg(response)
-                    }
+                    response = response.replace("/home/","")
+                    setMsg("File is generated at Path : " + response.substring(response.indexOf("/")+1))
                 })
-            setMounted(false)
+            setIsDisable(false)
         }
+    }, [nameFromButtonClicked])
+
+    const handleClick = () => {
+        setIsDisable(true)
+        setNameFromButtonClicked(name)
     }
 
     return (
         <div>
             <label>
-                Name:
-                <input type="text" name="name"/>
+                Camp Name (Copy from summary tab):
+                <input type="text" name="name" value={name} disabled={isDisable}
+                       onChange={e => setName(e.target.value)}/>
             </label>
             <br/>
-            <input type="button" value="Generate" onClick={makeCall()}/>
-
+            <input type="button" value="Generate" onClick={() => handleClick()}/><br/> <br/>
+            <label style={{color: "red"}}>{msg}</label>
         </div>
     );
 }
